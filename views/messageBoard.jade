@@ -2,7 +2,7 @@
 extends ./layout
 
 block content
-    ul.list
+    ul.list#threadList
         li(ripple="")
             img.item-icon(src="https://gravatar.com/avatar/1b86c137a05637c3cfdd87398c2882af")
             span.item-text What the?
@@ -19,5 +19,19 @@ block content
             span.item-text So, correct me if I'm wrong, but...
                 span.secondary-text Posted on 04/19/2016 by Corn
                     a.bold.openThread(href="/posts?post=03", ripple="") Open Thread
-
+    button.button.raised.bg-brown-500.color-white#newThreadButton New Thread
+    //modal
+    .modal.fade#addThreadModal(tabindex='-1', role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.modal-title Add A New Thread
+                .modal-body
+                    input#nameOfNewPoster(placeholder="What's your name?")
+                    input#newThreadTitle(placeholder="Enter a title for your thread")
+                    input#postersImage(placeholder="URL for your image")
+                    textarea#newThreadPost(rows="6" cols="50")
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') Close
+                    button.btn.btn-primary#createNewThread(type='button') Create New Thread
 

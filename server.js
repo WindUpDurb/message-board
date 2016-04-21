@@ -40,7 +40,8 @@ http.createServer(function (request, response) {
             });
             response.end(html);
             break;
-        case "/post":
+        case "/posts":
+            console.log("Posts Working")
             require("./posts")(parameters, response);
             break;
     };
