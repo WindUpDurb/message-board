@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+    head
+        title= pageTitle
+        script(src="https://code.jquery.com/jquery-2.2.3.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        link(rel="stylesheet" href="material.css")
+        link(rel="stylesheet" href="style.css")
+        script(src="material.js")
+        script(src="main.js")
+    body
+        div.sidemenu.sidebar
+            div#currentPageTextDiv
+                span.bold#currentPage #{currentPage}
+            .navbar.toolbar.bg-brown-500.color-white
+                .float-left
+                    a.bold(href='/', ripple='') Baked  'Tato
+            ul.list#sidemenuList
+                li
+                    a.bold(href="/recentposts", ripple="") Recent Posts
+                li
+                    a.bold(href="/messageboard", ripple="") Message Board
+        block content
+
+
+
+

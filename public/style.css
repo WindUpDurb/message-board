@@ -1,0 +1,36 @@
+.navbar {
+
+}
+
+.sidebar {
+    background-color: #8D6E63;
+}
+
+body {
+    background-color: #FFECB3;
+}
+
+#potato {
+    background-color: red;
+    max-height: 100px;
+    max-width: 100px;
+
+}
+
+#currentPageTextDiv {
+    text-align: center;
+    height: 18%;
+}
+
+#currentPage {
+    font-size: 200%;
+    color: white:
+}
+
+#sidemenuList {
+    text-align: center;
+}
+
+.openThread {
+    float: right;
+}
