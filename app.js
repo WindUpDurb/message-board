@@ -39,6 +39,8 @@ app.set("view engine", "jade");
 app.route("/messageboard")
     .get(function (request, response, next) {
 
+        console.log("message board params: ", request.params.postID);
+
         operations.getThreadList(function (error, threadList) {
             if (error) {
                 return response.status(400).send(error);
@@ -74,19 +76,23 @@ app.get("/", function (request, response, next) {
    });
 });
 
+//for different pages for each thread
 app.get("/posts/:postID", function (request, response, next) {
 
-    //if (request.params.postID.indexOf(".") === -1) {
-        var postID = request.params.postID;
+    if (request.params.postID.indexOf(".") !== -1) {
+        next();
+    }
+
+    var postID = request.params.postID;
 
 
     //var postID = request.params.postID;
 
-    //console.log("THe post ID: " , postID);
+    console.log("THe post ID: " , postID);
 
     operations.getThread(postID, function (error, thread){
         if (error) {
-            return response.status(400).send(error);
+            return response.status(400).next(error);
         }
         console.log("The end thread: ", thread)
         console.log("before render \n");
@@ -97,6 +103,38 @@ app.get("/posts/:postID", function (request, response, next) {
 
 
 });
+
+
+//debugging attempts
+//and for debugging purposes
+
+app.get("/posts/", function (request, response, next) {
+
+    /*    if (request.params.postID.indexOf(".") !== -1) {
+     console.log(" got it");
+     response.sendFile(request.params.postID ,{root: "./public"})
+ /*    }*!/
+
+    var postID = request.params.postID;
+
+
+    //var postID = request.params.postID;
+
+    console.log("THe post ID: " , postID);
+
+    operations.getThread(postID, function (error, thread){
+        if (error) {
+            return response.status(400).send(error);
+        }
+        console.log("The end thread: ", thread)
+        console.log("before render \n");*/
+        response.render("posts", {
+            currentPage: "Post"
+        });
+
+
+});
+
 
 app.use(function(request, response, next) {
     response.status(404).send("Not  Found.")

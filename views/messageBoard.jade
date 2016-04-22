@@ -9,6 +9,7 @@ block content
                     img.item-icon(src=thread.avatarURL)
                     span.item-text #{thread.threadTitle}
                         span.secondary-text Posted on #{thread.timeStamp} by #{thread.username}
+                            a.bold.deleteThread(ripple="") Delete Thread
                             a.bold.openThread(href="/posts/#{thread.postID}", ripple="") Open Thread
     button.button.raised.bg-brown-500.color-white#newThreadButton New Thread
     //modal

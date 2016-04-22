@@ -36,6 +36,14 @@ var operations = {
 
         })
 
+    },
+
+    deleteThread : function () {
+        $(".deleteThread").click(function () {
+
+            console.log("Working")
+        })
+
     }
 
 }
@@ -45,6 +53,7 @@ let initialize = function () {
     console.log("Working");
     operations.openNewThreadModal();
     operations.saveNewThread();
+    operations.deleteThread();
     //for material -- Keep
     var md = new Material();
 

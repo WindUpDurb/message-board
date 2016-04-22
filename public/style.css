@@ -5,6 +5,10 @@
 
 }
 
+.deleteThread {
+    float: right;
+    marin-right: 10px;
+}
 .threadTitleText {
     float: right;
 }
