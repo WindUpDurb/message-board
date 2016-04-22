@@ -79,9 +79,9 @@ app.get("/", function (request, response, next) {
 //for different pages for each thread
 app.get("/posts/:postID", function (request, response, next) {
 
-    if (request.params.postID.indexOf(".") !== -1) {
+/*    if (request.params.postID.indexOf(".") !== -1) {
         next();
-    }
+    }*/
 
     var postID = request.params.postID;
 
@@ -92,7 +92,7 @@ app.get("/posts/:postID", function (request, response, next) {
 
     operations.getThread(postID, function (error, thread){
         if (error) {
-            return response.status(400).next(error);
+            return response.status(400).send(error);
         }
         console.log("The end thread: ", thread)
         console.log("before render \n");
