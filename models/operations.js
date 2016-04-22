@@ -25,7 +25,34 @@ module.exports = {
             //make sure to return null as well as the parsed data
             callback(null, threadList);
         })
+    },
+
+    createNewThread : function (newThread, callback) {
+
+        this.getThreadList(function (error, threadList) {
+            
+            if(error) {
+                return callback(error);
+            }
+
+            var threadToAdd = {
+                username : newThread.username,
+                timestamp : newThread.timestamp,
+                threadTitle : newThread.threadTitle,
+                avatarURL : newThread.avatarURL,
+                postID : uuid()
+            };
+
+            threadList.push(threadToAdd);
+
+            fs.writeFile(threadListDataFile, JSON.stringify(threadList), function (error) {
+                callback(error);
+            });
+        });
+
     }
+
+
 
 
 };

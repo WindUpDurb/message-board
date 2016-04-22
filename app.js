@@ -36,26 +36,37 @@ app.set("view engine", "jade");
     })*/
 
 
-app.get("/messageboard", function (request, response, next) {
+app.route("/messageboard")
+    .get(function (request, response, next) {
 
-    operations.getThreadList(function (error, threadList) {
-        if (error) {
-            return response.status(400).send(error);
-        }
+        operations.getThreadList(function (error, threadList) {
+            if (error) {
+                return response.status(400).send(error);
+            }
 
-        var numOfThreads = threadList.length;
-       console.log("thread list:", threadList.length);
+            var numOfThreads = threadList.length;
+            //webpage render
+            response.render("messageBoard", {
+                currentPage: "Message Board",
+                numOfThreads: numOfThreads,
+                threads: threadList
+            });
 
-        //webpage render
-        response.render("messageBoard", {
-            currentPage: "Message Board",
-            numOfThreads: numOfThreads,
-            threads: threadList
+        });
+    })
+    .post(function (request, response, next) {
+
+        var newThread = request.body;
+
+        operations.createNewThread(newThread, function (error) {
+            if (error) {
+                return response.status(400).send(error);
+            }
+            response.send;
         });
 
+       response.send("\n")
     });
-
-});
 
 app.get("/", function (request, response, next) {
    response.render("index", {

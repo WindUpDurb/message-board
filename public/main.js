@@ -12,24 +12,26 @@ var operations = {
 
     saveNewThread : function () {
         $("#createNewThread").click(function () {
-            var $nameOfPoster = $("#nameOfNewPoster").val() || "NewUser";
-            var $title = $("#newThreadTitle").val();
-            var $post = $("#newThreadPost").val();
-            var timeStamp = moment().toObject();
-            var $urlToImage = $("postersImage").val() || "http://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png";
-            var $newPost = $("<li>").attr("ripple", "");
-            var $img = $("<img>").addClass("item-icon").attr("src", $urlToImage);
-            var $itemText = $("<span>").addClass("item-text").text($title);
-            var $secondaryText = $("<span>").addClass("secondary-text").text(`Posted on ${timeStamp.months + 1}/${timeStamp.date}/${timeStamp.years} by ${$nameOfPoster}`);
-           // var $anchor = $("<a>").addClass("bold openThread").attr("/posts").text("New Thread");
-           // $($secondaryText).append($anchor);
-            console.log($secondaryText.text())
-            $($itemText).append($secondaryText);
-            $($newPost).append($itemText);
-            $($newPost).prepend($img);
+            var $username = $("#nameOfNewPoster").val() || "NewUser";
+            var $threadTitle = $("#newThreadTitle").val() || "Did you forget?";
+            var $post = $("#newThreadPost").val() || "Hey, where's your post?";
+            var newTime = moment().toObject();
+            var timeStamp = `${newTime.months + 1}/${newTime.date}/${newTime.years}`;
+            var $avatarURL = $("postersImage").val() || "http://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png";
+            //data to send
+            var newThreadData = {
+                username : $username,
+                timeStamp : timeStamp,
+                threadTitle : $threadTitle,
+                avatarURL : $avatarURL
+            };
 
-            $("#threadList").append($newPost);
-
+           $.ajax({
+               type: "POST",
+                url: "/messageboard",
+                data: newThreadData
+            });
+            
             $("#addThreadModal").modal("hide")
 
         })
