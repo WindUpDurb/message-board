@@ -1,5 +1,12 @@
-.navbar {
+#threadTitleDiv {
+    float: right;
+    width: 70%;
+    background-color: white;
 
+}
+
+.threadTitleText {
+    float: right;
 }
 
 .sidebar {
@@ -33,4 +40,13 @@ body {
 
 .openThread {
     float: right;
+}
+
+img {
+    max-height: 80px;
+    max-width: 80px;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
 }

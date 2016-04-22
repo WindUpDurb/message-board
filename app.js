@@ -74,6 +74,30 @@ app.get("/", function (request, response, next) {
    });
 });
 
+app.get("/posts/:postID", function (request, response, next) {
+
+    //if (request.params.postID.indexOf(".") === -1) {
+        var postID = request.params.postID;
+
+
+    //var postID = request.params.postID;
+
+    //console.log("THe post ID: " , postID);
+
+    operations.getThread(postID, function (error, thread){
+        if (error) {
+            return response.status(400).send(error);
+        }
+        console.log("The end thread: ", thread)
+        console.log("before render \n");
+        response.render("posts", {
+            currentPage: "Post"
+        });
+    });
+
+
+});
+
 app.use(function(request, response, next) {
     response.status(404).send("Not  Found.")
 });
