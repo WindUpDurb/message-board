@@ -2,23 +2,13 @@
 extends ./layout
 
 block content
-    ul.list#threadList
-        li(ripple="")
-            img.item-icon(src="https://gravatar.com/avatar/1b86c137a05637c3cfdd87398c2882af")
-            span.item-text What the?
-                span.secondary-text Posted on 04/20/2016 by David Urbina
-                    a.bold.openThread(href="/posts?post=01", ripple="") Open Thread
-
-        li(ripple="")
-            img.item-icon(src="http://lh3.googleusercontent.com/tMxPVBZf2JFnpRk_aRabctH3W9232wtfJqvd3PtH-MX8gk69CiS7lyGD6ORc04XwJ_PxC2K7JMXUz7-VbbFM-gickcg=s256-c")
-            span.item-text Where do taters go in the summer time?
-                span.secondary-text Posted on 04/20/2016 by Baked 'Tato
-                    a.bold.openThread(href="/posts?post=02", ripple="") Open Thread
-        li(ripple="")
-            img.item-icon(src="http://static.planetminecraft.com/files/resource_media/screenshot/1235/corn_3434003.jpg")
-            span.item-text So, correct me if I'm wrong, but...
-                span.secondary-text Posted on 04/19/2016 by Corn
-                    a.bold.openThread(href="/posts?post=03", ripple="") Open Thread
+    if numOfThreads
+        ul.list#threadList
+            each thread in threads
+                li(ripple="")
+                    img.item-icon(src=thread.avatarURL)
+                    span.item-text #{thread.threadTitle}
+                        span.secondary-text Posted on #{thread.timeStamp} by #{thread.username}
     button.button.raised.bg-brown-500.color-white#newThreadButton New Thread
     //modal
     .modal.fade#addThreadModal(tabindex='-1', role='dialog')
