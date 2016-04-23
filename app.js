@@ -29,110 +29,14 @@ app.use( express.static("public") );
 //for jade
 app.set("view engine", "jade");
 
-/*app.route("/posts")
-    .get(function (request, response, next) {
-        
-        
-    })*/
-
-
-app.route("/messageboard")
-    .get(function (request, response, next) {
-
-        console.log("message board params: ", request.params.postID);
-
-        operations.getThreadList(function (error, threadList) {
-            if (error) {
-                return response.status(400).send(error);
-            }
-
-            var numOfThreads = threadList.length;
-            //webpage render
-            response.render("messageBoard", {
-                currentPage: "Message Board",
-                numOfThreads: numOfThreads,
-                threads: threadList
-            });
-
-        });
-    })
-    .post(function (request, response, next) {
-
-        var newThread = request.body;
-
-        operations.createNewThread(newThread, function (error) {
-            if (error) {
-                return response.status(400).send(error);
-            }
-            response.send;
-        });
-
-       response.send("\n")
-    });
+//routers
+app.use("/messageboard", require("./routes/messageboard"));
+app.use("/posts", require("./routes/posts"));
 
 app.get("/", function (request, response, next) {
    response.render("index", {
        currentPage: "Home"
    });
-});
-
-//for different pages for each thread
-app.get("/posts/:postID", function (request, response, next) {
-
-/*    if (request.params.postID.indexOf(".") !== -1) {
-        next();
-    }*/
-
-    var postID = request.params.postID;
-
-
-    //var postID = request.params.postID;
-
-    console.log("THe post ID: " , postID);
-
-    operations.getThread(postID, function (error, thread){
-        if (error) {
-            return response.status(400).send(error);
-        }
-        console.log("The end thread: ", thread)
-        console.log("before render \n");
-        response.render("posts", {
-            currentPage: "Post"
-        });
-    });
-
-
-});
-
-
-//debugging attempts
-//and for debugging purposes
-
-app.get("/posts/", function (request, response, next) {
-
-    /*    if (request.params.postID.indexOf(".") !== -1) {
-     console.log(" got it");
-     response.sendFile(request.params.postID ,{root: "./public"})
- /*    }*!/
-
-    var postID = request.params.postID;
-
-
-    //var postID = request.params.postID;
-
-    console.log("THe post ID: " , postID);
-
-    operations.getThread(postID, function (error, thread){
-        if (error) {
-            return response.status(400).send(error);
-        }
-        console.log("The end thread: ", thread)
-        console.log("before render \n");*/
-        response.render("posts", {
-            currentPage: "Post"
-        });
-
-
 });
 
 

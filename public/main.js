@@ -34,26 +34,53 @@ var operations = {
             
             $("#addThreadModal").modal("hide")
 
-        })
+        });
 
     },
 
-    deleteThread : function () {
+    deleteThreadModal : function () {
         $(".deleteThread").click(function () {
+            var $postID = $(this).attr("data-postID");
+            $("#deleteThreadModal").modal("show");
+            var toDelete = {
+                toDelete : $postID
+            };
+            //post request
+            $.ajax({
+                type: "POST",
+                url: "/messageboard",
+                data: toDelete
+            });
+        });
+    },
 
-            console.log("Working")
-        })
+    confirmThreadDelete : function () {
+        $("#deleteThread").click(function () {
+            $.ajax({
+                type: "DELETE",
+                url: "/messageboard"
+                //on successful response do jquery to update dom
+            });
+            $("#deleteThreadModal").modal("hide");
+        });
+    },
 
+    openEditPostModal : function () {
+        $(".editThread").click(function () {
+            $("#editPostModal").modal("show");
+        });
     }
 
-}
+};
 
 
 let initialize = function () {
     console.log("Working");
     operations.openNewThreadModal();
     operations.saveNewThread();
-    operations.deleteThread();
+    operations.deleteThreadModal();
+    operations.confirmThreadDelete();
+    operations.openEditPostModal();
     //for material -- Keep
     var md = new Material();
 

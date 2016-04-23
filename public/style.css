@@ -5,11 +5,23 @@
 
 }
 
+#editPostModal {
+    text-align: center;
+}
+
+#deleteThreadModal {
+    text-align: center;
+}
+
 .deleteThread {
     float: right;
     marin-right: 10px;
 }
 .threadTitleText {
+    float: right;
+}
+
+.editThread {
     float: right;
 }
 

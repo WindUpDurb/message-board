@@ -8,9 +8,10 @@ block content
                 li(ripple="")
                     img.item-icon(src=thread.avatarURL)
                     span.item-text #{thread.threadTitle}
-                        span.secondary-text Posted on #{thread.timeStamp} by #{thread.username}
-                            a.bold.deleteThread(ripple="") Delete Thread
-                            a.bold.openThread(href="/posts/#{thread.postID}", ripple="") Open Thread
+                        span.secondary-text This is where the introduction to the post will be...
+                            span.secondary-text Posted on #{thread.timeStamp} by #{thread.username}
+                              a.bold.deleteThread(ripple="" data-postID="#{thread.postID}") Delete Thread
+                              a.bold.openThread(href="/posts/#{thread.postID}", ripple="") Open Thread
     button.button.raised.bg-brown-500.color-white#newThreadButton New Thread
     //modal
     .modal.fade#addThreadModal(tabindex='-1', role='dialog')
@@ -26,4 +27,16 @@ block content
                 .modal-footer
                     button.btn.btn-default(type='button', data-dismiss='modal') Close
                     button.btn.btn-primary#createNewThread(type='button') Create New Thread
+    // Delete thread modal
+    #deleteThreadModal.modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel')
+        .modal-dialog.modal-sm
+            .modal-content
+                h2 Confirm to Delete This Thread
+                br
+                br
+                h1
+                    span Thread Title
+                br
+                button#deleteThread.btn.btn-danger Confirm
+
 
