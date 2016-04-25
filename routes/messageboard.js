@@ -6,7 +6,8 @@ var router = express.Router();
 var jade = require('jade');
 var operations = require("../models/operations");
 
-router.get("/", function (request, response, next) {
+router.route("/")
+    .get(function (request, response, next) {
     operations.getThreadList(function (error, threadList) {
         if (error) {
             return response.status(400).send(error);
@@ -19,12 +20,9 @@ router.get("/", function (request, response, next) {
             threads: threadList,
             //threadID:
         });
-
     })
-
-});
-
-router.post("/", function (request, response, next) {
+    })
+    .post(function (request, response, next) {
     var newThread = request.body;
     //if the delete button is pushed
     if (newThread.hasOwnProperty("toDelete")) {
@@ -46,20 +44,16 @@ router.post("/", function (request, response, next) {
         });
         response.send("Response Complete");
     }
-});
-
-router.delete("/", function (request, response, next) {
+    })
+    .delete(function (request, response, next) {
    var threadToDelete = request.body;
-
     operations.confirmDelete(function(error, threadID) {
         if (error) {
             return response.status(400).response.send(error);
         }
         console.log(threadID);
     });
-
     response.send("Delete Request Received");
-
 });
 
 
